@@ -7,9 +7,6 @@
 body {
   @apply bg-[url('/static/images/wallpaper.jpg')] bg-no-repeat bg-cover bg-center h-screen;
 }
-span {
-  font-weight: 400;
-}
 
 @layer utilities {
   @variants responsive {
