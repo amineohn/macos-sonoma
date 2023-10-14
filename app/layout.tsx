@@ -2,6 +2,7 @@
 import { StoreProvider } from "easy-peasy";
 import "./globals.css";
 import { useStore } from "./store";
+import { ThemeProvider } from "next-themes";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StoreProvider store={store}>{children}</StoreProvider>
+        <StoreProvider store={store}>
+          <ThemeProvider attribute="class" defaultTheme="light">
+            {children}
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );

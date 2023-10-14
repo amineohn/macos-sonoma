@@ -5,7 +5,7 @@
 @import url("https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css");
 
 body {
-  @apply bg-[url('/static/images/wallpaper.jpg')] bg-no-repeat bg-cover bg-center h-screen;
+  @apply bg-[url('/static/images/wallpaper.jpg')] dark:bg-[url('/static/images/wallpaper-dark.jpg')] bg-no-repeat bg-cover bg-center h-screen transition-all ease-in-out;
 }
 
 @layer utilities {
@@ -23,4 +23,29 @@ body {
       text-shadow: none;
     }
   }
+}
+
+.cc-btn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  --un-bg-opacity: 1;
+  background-color: rgba(59, 130, 246, var(--un-bg-opacity));
+  --un-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--un-text-opacity));
+}
+
+.cc-btn-active {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #9ca3af40;
+  --un-text-opacity: 1;
+  color: rgba(55, 65, 81, var(--un-text-opacity));
 }
