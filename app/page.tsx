@@ -25,7 +25,7 @@ export default function Home() {
           <div className="w-full h-full bg-white opacity-50 text-black flex items-center justify-center z-1"></div>
           <div className="absolute top-0 w-full z-50">
             <div className="flex items-center w-full justify-between h-9 px-1">
-              <div className="inline-flex items-center space-x-3">
+              <div className="inline-flex items-center space-x-1.5">
                 <div className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition">
                   <Icons
                     name="apple"
