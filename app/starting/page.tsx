@@ -3,14 +3,15 @@ import { Icons } from "../components/icons";
 import { useState, useEffect } from "react";
 import { variants } from "../constants/variants-animations";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [progress, setProgress] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {
     if (progress >= 100) {
       setTimeout(() => {
-        window.location.replace("/");
+        router.push("/");
       }, 1000);
     }
   }, [progress]);
