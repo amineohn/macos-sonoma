@@ -24,14 +24,47 @@ export default function Home() {
         <div className="absolute inset-0">
           <div className="w-full h-full bg-white opacity-50 text-black flex items-center justify-center z-1"></div>
           <div className="absolute top-0 w-full z-50">
-            <div className="flex items-center w-full justify-between h-9">
-              <div>
-                <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
+            <div className="flex items-center w-full justify-between h-9 px-1">
+              <div className="inline-flex items-center space-x-3">
+                <div className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition">
                   <Icons
                     name="apple"
                     className="w-6 h-6 text-white opacity-100"
                   />
                 </div>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    Finder
+                  </p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    File
+                  </p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    Edit
+                  </p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    View
+                  </p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">Go</p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    Window
+                  </p>
+                </button>
+                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
+                  <p className="text-xs text-white mix-blend-hard-light">
+                    Help
+                  </p>
+                </button>
               </div>
               <div>
                 <div className="inline-flex items-center justify-center py-2">
