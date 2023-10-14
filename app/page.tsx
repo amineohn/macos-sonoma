@@ -15,7 +15,7 @@ export default function Home() {
       "fr-FR",
       options as any
     ).format(date);
-    return formattedDate;
+    return formattedDate?.replace(".,", " ")?.replace(".", "");
   }
 
   return (
