@@ -16,7 +16,6 @@ export function Icons({ name, className }: IIconsProps) {
             style={{
               mixBlendMode: "hard-light",
             }}
-            opacity="0.76"
             filter="url(#filter0_d_0_69)"
           >
             <path
@@ -75,7 +74,6 @@ export function Icons({ name, className }: IIconsProps) {
             style={{
               mixBlendMode: "hard-light",
             }}
-            opacity="0.76"
             filter="url(#filter0_d_0_86)"
           >
             <path
@@ -133,7 +131,6 @@ export function Icons({ name, className }: IIconsProps) {
             style={{
               mixBlendMode: "hard-light",
             }}
-            opacity="0.76"
             filter="url(#filter0_d_0_88)"
           >
             <path
@@ -191,7 +188,6 @@ export function Icons({ name, className }: IIconsProps) {
             style={{
               mixBlendMode: "hard-light",
             }}
-            opacity="0.76"
             filter="url(#filter0_d_0_90)"
           >
             <path
@@ -249,7 +245,6 @@ export function Icons({ name, className }: IIconsProps) {
             style={{
               mixBlendMode: "hard-light",
             }}
-            opacity="0.76"
             filter="url(#filter0_d_0_92)"
           >
             <path
