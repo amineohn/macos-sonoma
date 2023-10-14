@@ -14,10 +14,12 @@ export function MenuBar() {
       "fr-FR",
       options as any
     ).format(date);
-    return formattedDate?.replace(".,", " ")?.replace(".", "");
+    const capitalizedDate =
+      formattedDate?.charAt(0).toUpperCase() + formattedDate?.slice(1);
+    return capitalizedDate?.replace(".,", " ")?.replace(".", "");
   }
   return (
-    <div className="relative w-full h-9">
+    <div className="relative w-full h-9 select-none">
       <div className="absolute inset-0">
         <div className="w-full h-full bg-white opacity-50 text-black flex items-center justify-center z-1"></div>
         <div className="absolute top-0 w-full z-50">
@@ -30,7 +32,7 @@ export function MenuBar() {
                 />
               </div>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
                   Finder
                 </p>
               </button>
@@ -38,21 +40,29 @@ export function MenuBar() {
                 <p className="text-xs text-white mix-blend-hard-light">File</p>
               </button>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">Edit</p>
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
+                  Edit
+                </p>
               </button>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">View</p>
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
+                  View
+                </p>
               </button>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">Go</p>
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
+                  Go
+                </p>
               </button>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
                   Window
                 </p>
               </button>
               <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                <p className="text-xs text-white mix-blend-hard-light">Help</p>
+                <p className="text-xs font-medium text-white mix-blend-hard-light">
+                  Help
+                </p>
               </button>
             </div>
             <div>
@@ -82,7 +92,7 @@ export function MenuBar() {
                   />
                 </div>
                 <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
-                  <span className="text-white ml-2 text-sm opacity-100">
+                  <span className="text-white px-2 mt-1 text-xs font-medium opacity-100">
                     {showDate()}
                   </span>
                 </div>
