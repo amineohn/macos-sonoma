@@ -50,7 +50,7 @@ export function MenuBar() {
                   </p>
                 </button>
                 <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs text-white mix-blend-hard-light">
+                  <p className="text-xs font-medium text-white mix-blend-hard-light">
                     File
                   </p>
                 </button>
