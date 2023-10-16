@@ -5,7 +5,7 @@
 @import url("https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css");
 
 body {
-  @apply bg-[url('/static/images/wallpaper.jpg')] dark:bg-[url('/static/images/wallpaper-dark.jpg')] bg-no-repeat bg-cover bg-center h-screen transition-all ease-in-out;
+  @apply bg-[url('/static/images/wallpaper-3.jpg')] dark:bg-[url('/static/images/wallpaper-dark.jpg')] bg-no-repeat bg-cover bg-center h-screen transition-all ease-in-out;
 }
 
 @layer utilities {
