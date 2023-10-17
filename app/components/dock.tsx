@@ -1,8 +1,7 @@
 "use client";
 import { useRef, memo, useState } from "react";
 import { useStoreActions } from "../store";
-import { LaunchPad } from "./launchpad"; // import the LaunchPad component with named export
-
+import { LaunchPad } from "./launchpad";
 interface DockButton {
   title: string;
   logo: string;
@@ -166,7 +165,7 @@ const Dock = ({ openLaunchPad }: DockProps) => {
       {openLaunchpad && <LaunchPad />}
       <div
         ref={dockButtonsWrapper}
-        className="flex h-16 flex-row justify-center items-end bg-white backdrop-blur-lg fixed bottom-2 left-0 right-0 px-2 bg-opacity-10 w-max m-auto rounded-xl"
+        className="animate-fade-up flex h-16 flex-row justify-center items-end border border-gray-300/10 bg-white backdrop-blur-lg fixed bottom-2 left-0 right-0 px-2 bg-opacity-10 w-max m-auto rounded-xl"
       >
         {dockButtons.map((item: DockButton, i: number) => (
           <>

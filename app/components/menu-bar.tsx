@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Icons } from "./icons";
-import { ControlCenter } from "./menu-extends/control-center";
-import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
 export function MenuBar() {
