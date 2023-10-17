@@ -1,9 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-interface LaunchPadProps {
-  setOpen?: (open: boolean) => void;
-  open: boolean;
-}
 export function LaunchPad() {
   return (
     <>
