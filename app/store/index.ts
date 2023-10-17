@@ -11,8 +11,11 @@ import {
 
 interface MenuBar {
   isMenuOpen: boolean;
+  isLaunchpadOpen: boolean;
   closeMenu: Action<MenuBar>;
   openMenu: Action<MenuBar>;
+  closeLaunchpad: Action<MenuBar>;
+  openLaunchpad: Action<MenuBar>;
 }
 
 export interface StoreModel {
@@ -22,6 +25,7 @@ export interface StoreModel {
 interface InitialState {
   menuBar: {
     isMenuOpen: boolean;
+    isLaunchpadOpen: boolean;
   };
 }
 
@@ -36,6 +40,7 @@ export const useStoreState = typedHooks.useStoreState;
 const initialState: InitialState = {
   menuBar: {
     isMenuOpen: false,
+    isLaunchpadOpen: false,
   },
 };
 
@@ -49,6 +54,16 @@ const menuBarModel: MenuBar = {
   openMenu: action((state) => {
     if (!state.isMenuOpen) {
       state.isMenuOpen = true;
+    }
+  }),
+  closeLaunchpad: action((state) => {
+    if (state.isLaunchpadOpen) {
+      state.isLaunchpadOpen = false;
+    }
+  }),
+  openLaunchpad: action((state) => {
+    if (!state.isLaunchpadOpen) {
+      state.isLaunchpadOpen = true;
     }
   }),
 };
