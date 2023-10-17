@@ -168,27 +168,25 @@ const Dock = ({ openLaunchPad }: DockProps) => {
         className="animate-fade-up flex h-16 flex-row justify-center items-end border border-gray-300/10 bg-white backdrop-blur-lg fixed bottom-2 left-0 right-0 px-2 bg-opacity-10 w-max m-auto rounded-xl"
       >
         {dockButtons.map((item: DockButton, i: number) => (
-          <>
-            <button
-              key={item.title}
-              className="w-16 align-bottom dock-item p-2"
-              style={{ transition: "all ease .2s" }}
-              onMouseEnter={() => handleItemsMouseEnter(i)}
-              onMouseLeave={() => handleItemsMouseLeave(i)}
-              onClick={() => {
-                if (item.title === "Launchpad") {
-                  setOpenLaunchpad(true);
-                }
-                handleItemsClick();
-              }}
-            >
-              <img
-                alt="dock icon"
-                className="select-none w-full"
-                src={item.logo}
-              />
-            </button>
-          </>
+          <button
+            key={item.title}
+            className="w-16 align-bottom dock-item p-2"
+            style={{ transition: "all ease .2s" }}
+            onMouseEnter={() => handleItemsMouseEnter(i)}
+            onMouseLeave={() => handleItemsMouseLeave(i)}
+            onClick={() => {
+              if (item.title === "Launchpad") {
+                setOpenLaunchpad(true);
+              }
+              handleItemsClick();
+            }}
+          >
+            <img
+              alt="dock icon"
+              className="select-none w-full"
+              src={item.logo}
+            />
+          </button>
         ))}
       </div>
     </>
