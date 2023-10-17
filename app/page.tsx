@@ -5,7 +5,7 @@ import { MenuBar } from "./components/menu-bar";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
-export default function Home() {
+export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
