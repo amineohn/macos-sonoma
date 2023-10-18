@@ -26,7 +26,7 @@ export default function Page() {
           return prevProgress + 10;
         }
       });
-    }, 1000);
+    }, 700);
 
     return () => clearInterval(interval);
   }, []);
