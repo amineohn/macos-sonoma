@@ -5,6 +5,17 @@ import { MenuBar } from "../components/menu-bar";
 export default function Page() {
   return (
     <>
+      <video
+        autoPlay
+        muted
+        loop
+        className="absolute z-[-1] w-full h-full object-cover"
+      >
+        <source
+          src="http://sylvan.apple.com/itunes-assets/Aerials126/v4/ec/eb/c8/ecebc8d2-5486-c2b2-52ae-6f0ab2d6b65f/W010_C003_F01_third_sdr_4k_qp24_15Mbps_240p_t2160_tsa.mov"
+          type="video/mp4"
+        />
+      </video>
       <MenuBar />
       <div className="p-3">
         <div className="flex justify-end select-none space-x-2">
