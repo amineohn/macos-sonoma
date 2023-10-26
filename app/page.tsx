@@ -110,7 +110,7 @@ export default function Page() {
             <img src="/static/images/no-app-icon.png" className="w-10 h-10" />
             <div className="flex flex-col">
               <p className="text-sm font-semibold text-black/80">
-                Le mot de passe
+                Notification
               </p>
               <span className="text-xs font-normal text-black/60">
                 Si vous voulez accéder à ce Mac, veuillez saisir le mot de passe
