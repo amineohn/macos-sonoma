@@ -24,7 +24,23 @@ body {
     }
   }
 }
+.shadowZ {
+  mix-blend-mode: multiply;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.55),
+    0px 36px 100px 0px rgba(0, 0, 0, 0.4);
+}
 
+.alert_backing {
+  backdrop-filter: blur(40.774227142333984px);
+}
+
+.inner_shadow {
+  box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+.oval {
+  fill: #f5f5f5;
+}
 .cc-btn {
   width: 2rem;
   height: 2rem;

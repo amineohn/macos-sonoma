@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Icons } from "./icons";
 
-export function Window() {
+export function Window({ children }: { children: React.ReactNode }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -14,6 +14,13 @@ export function Window() {
 
   const windowRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (isDragging || isResizing) {
+      windowRef.current!.style.transition = "none";
+    } else {
+      windowRef.current!.style.transition = "all 0.2s ease-out";
+    }
+  }, [isDragging, isResizing]);
   useEffect(() => {
     const handleResize = () => {
       if (windowRef.current) {
@@ -102,6 +109,16 @@ export function Window() {
     event.stopPropagation();
   };
 
+  const onClick = () => {
+    const windowRect = windowRef.current!.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    setPosition({
+      x: (screenWidth - windowRect.width) / 2,
+      y: (screenHeight - windowRect.height) / 2,
+    });
+  };
+
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     const windowRect = windowRef.current!.getBoundingClientRect();
     const x = event.clientX - windowRect.left;
@@ -131,14 +148,26 @@ export function Window() {
     }
   };
 
+  useEffect(() => {
+    const windowRect = windowRef.current!.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    setPosition({
+      x: (screenWidth - windowRect.width) / 2,
+      y: (screenHeight - windowRect.height) / 2,
+    });
+  }, []);
+
   return (
     <div
-      className="fixed bg-white shadow-lg rounded-lg overflow-hidden"
+      className="fixed bg-white shadow-lg overflow-hidden rounded-[10px]"
       style={{
         top: position.y,
         left: position.x,
         width: windowSize.width,
         height: windowSize.height,
+        boxShadow:
+          "0px 0.5px 0px 0px rgba(0, 0, 0, 0.15), 0px -0.5px 0px 0px rgba(0, 0, 0, 0.05) inset",
       }}
       ref={windowRef}
       onMouseMove={handleMouseMove as any}
@@ -146,24 +175,22 @@ export function Window() {
       onMouseEnter={handleMouseEnter}
     >
       <div
-        className="flex items-center justify-between px-3 py-2 bg-gray-200"
+        className="flex items-center justify-between px-3 py-3 h-9 border border-b-neutral-300/70"
         onMouseDown={handleMouseDown}
-        style={{ cursor: "move" }}
       >
-        <Icons name="apple" className="w-6 h-6 text-gray-700" />
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+        <div className="flex items-center space-x-2 h-6">
+          <div className="w-[13px] h-[13px] bg-[#EE6A5F] border border-[#CE5347] rounded-full" />
           <div
-            className="w-3 h-3 bg-green-500 rounded-full cursor-pointer"
-            onMouseDown={(event) => handleResizeMouseDown(event, "se")}
-          ></div>
+            className="w-[13px] h-[13px] bg-[#F5BD4F] border border-[#D6A243] rounded-full"
+            onClick={handleMouseDown}
+          />
+          <div
+            className="w-[13px] h-[13px] bg-[#61C454] border border-[#58A942] rounded-full cursor-pointer"
+            onClick={onClick}
+          />
         </div>
       </div>
-      <div className="p-3">
-        <p className="text-lg font-medium">Window Title</p>
-        <p className="text-gray-500">Window content goes here</p>
-      </div>
+      <div className="p-3">{children}</div>
       {resizeDirection && (
         <div
           className={`absolute ${
@@ -176,7 +203,7 @@ export function Window() {
               : "ew"
           }`}
           onMouseDown={(event) => handleResizeMouseDown(event, resizeDirection)}
-        ></div>
+        />
       )}
     </div>
   );
