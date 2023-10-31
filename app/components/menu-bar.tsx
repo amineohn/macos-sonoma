@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 export function MenuBar() {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
-  const [openThings, setOpenThings] = useState({ openControl: false });
+  const [open, setOpen] = useState({ control: false });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,8 +128,8 @@ export function MenuBar() {
                   <div
                     className="hover:bg-white/10 px-1 py-0.5 rounded-md transition"
                     onClick={() =>
-                      setOpenThings({
-                        openControl: openThings.openControl ? false : true,
+                      setOpen({
+                        control: open.control ? false : true,
                       })
                     }
                   >
@@ -151,7 +151,7 @@ export function MenuBar() {
         <div className="absolute inset-0 bg-gray-700/50 flex px-2 justify-between items-center mix-blend-color-burn backdrop-filter backdrop-blur-[51.8036px] z-0"></div>
       </div>
 
-      {openThings.openControl && (
+      {open.control && (
         <>
           <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none">
             <div className="row-span-2 col-span-2 p-2 flex flex-col justify-around">
