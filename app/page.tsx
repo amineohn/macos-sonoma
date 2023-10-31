@@ -87,11 +87,11 @@ export default function Page() {
         <Icons name="wifi" className="w-6 h-6 text-white mr-2" />
       </motion.div>
 
-      <div className="flex justify-end w-full px-3 py-3">
+      <div className="flex justify-end w-full px-3 py-3 select-none">
         <div className="shadowZ absolute flex-shrink-0 w-[346px] h-[75px] rounded-[0.625rem] bg-white p-5"></div>
-        <div className="absolute z-50 alert_backing flex-shrink-0 rounded-[0.625rem] w-[346px] h-[75px]  bg-[#f6f6f6]/[.60] p-3">
+        <div className="absolute z-50 alert_backing flex-shrink-0 rounded-[0.625rem] w-[346px] h-[75px]  bg-[#f6f6f6]/[.50] p-3">
           <div className="flex justify-end items-center absolute right-0 pr-2">
-            <span className="text-xs font-light text-neutral-400">
+            <span className="text-xs font-light text-neutral-950">
               maintenant
             </span>
           </div>
