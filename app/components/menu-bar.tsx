@@ -1,14 +1,44 @@
-"use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "./icons";
 import { useTheme } from "next-themes";
 
 export function MenuBar() {
-  const [openThings, setOpenThings] = useState({
-    openControl: false,
-  });
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [openThings, setOpenThings] = useState({ openControl: false });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentDate = new Date();
+      const formattedTime = currentDate
+        .toLocaleTimeString("fr-FR", {
+          timeZone: "Europe/Paris",
+          hour12: false,
+        })
+        .slice(0, -3);
+      const formattedDate = currentDate.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      setTime(formattedTime);
+      setDate(formattedDate);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  function capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   function showDate() {
-    const date = new Date();
+    const currentDate = new Date();
     const options = {
       weekday: "short",
       month: "short",
@@ -19,14 +49,11 @@ export function MenuBar() {
     const formattedDate = new Intl.DateTimeFormat(
       "fr-FR",
       options as any
-    ).format(date);
-    const capitalizedDate =
-      formattedDate?.charAt(0).toUpperCase() + formattedDate?.slice(1);
-    return capitalizedDate?.replace(".,", " ")?.replace(".", "");
-  }
+    ).format(currentDate);
+    const capitalizedDate = capitalize(formattedDate);
 
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
+    return capitalizedDate.replace(".,", " ").replace(".", "");
+  }
 
   return (
     <>
