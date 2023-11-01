@@ -153,7 +153,7 @@ export function MenuBar() {
 
       {open.control && (
         <>
-          <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none">
+          <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
             <div className="row-span-2 col-span-2 p-2 flex flex-col justify-around">
               <div className="flex items-center space-x-2">
                 <div className="cc-btn">
