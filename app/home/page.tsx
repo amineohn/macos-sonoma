@@ -1,7 +1,6 @@
 "use client";
 import Dock from "../components/dock";
 import { MenuBar } from "../components/menu-bar";
-import { Window } from "../components/window";
 export default function Page() {
   return (
     <>
