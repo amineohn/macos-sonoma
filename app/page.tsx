@@ -2,16 +2,16 @@
 import { useEffect, useState } from "react";
 import { Icons } from "./components/icons";
 import { motion } from "framer-motion";
-import Cookies from "js-cookie";
+import { set, get } from "js-cookie";
 import { LockScreen } from "./components/lockscreen";
 
 export default function Page() {
   const [showLoading, setShowLoading] = useState(false);
   useEffect(() => {
-    const show = Cookies.get("show");
+    const show = get("show");
 
     if (!show) {
-      Cookies.set("show", "true");
+      set("show", "true");
       setShowLoading(true);
     }
   }, []);
