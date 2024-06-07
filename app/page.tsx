@@ -4,6 +4,7 @@ import { Icons } from "./components/icons";
 import { motion } from "framer-motion";
 import { set, get } from "js-cookie";
 import { LockScreen } from "./components/lockscreen";
+import { Toast } from "./components/ui/toast";
 
 export default function Page() {
   const [showLoading, setShowLoading] = useState(false);
@@ -89,33 +90,18 @@ export default function Page() {
             <Icons name="wifi" className="w-6 h-6 text-white mr-2" />
           </motion.div>
 
-          <div className="flex justify-end w-full px-3 py-3 select-none">
-            <div className="shadowZ absolute flex-shrink-0 w-[346px] h-[75px] rounded-[0.625rem] bg-white p-5"></div>
-            <div className="absolute z-50 alert_backing flex-shrink-0 rounded-[0.625rem] w-[346px] h-[75px]  bg-[#f6f6f6]/[.50] p-3">
-              <div className="flex justify-end items-center absolute right-0 pr-2">
-                <span className="text-xs font-light text-neutral-950">
-                  maintenant
-                </span>
-              </div>
-              <div className="inline-flex space-x-2 items-center ">
-                <img
-                  src="/static/images/no-app-icon.png"
-                  className="w-10 h-10"
-                />
-                <div className="flex flex-col">
-                  <p className="text-sm font-semibold text-black/80">
-                    Notification
-                  </p>
-                  <span className="text-xs font-normal text-black/60">
-                    Si vous voulez accéder à ce Mac, veuillez saisir le mot de
-                    passe suivant : password
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="inner_shadow flex-shrink-0 rounded-[0.625rem] bg-black/0" />
-            <div className="flex flex-shrink-0 justify-center items-center w-5 h-5"></div>
-          </div>
+          <Toast
+            title={"Notification"}
+            image="/static/images/no-app-icon.png"
+            message={
+              <>
+                Si vous voulez accéder à ce Mac, veuillez saisir le mot de passe
+                suivant : password
+              </>
+            }
+            time="maintenant"
+          />
+
           <LockScreen />
         </>
       )}

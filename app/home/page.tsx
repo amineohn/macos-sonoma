@@ -1,11 +1,12 @@
 "use client";
 import Dock from "../components/dock";
 import { MenuBar } from "../components/menu-bar";
+import { Toast } from "../components/ui/toast";
 export default function Page() {
   return (
     <>
       <MenuBar />
-      <div className="p-3">
+      <div className="p-3 hidden">
         <div className="flex justify-end select-none space-x-2">
           <div className="flex flex-col items-center">
             <div className="w-[310px] h-[150px] rounded-2xl bg-white shadow"></div>
@@ -67,33 +68,18 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <Toast
+        title={"Notification"}
+        image="/static/images/no-app-icon.png"
+        message={
+          <>
+            Je dois te dire que la reproduction de MacOS Sonoma est très loin
+            d'être fini.
+          </>
+        }
+        time="maintenant"
+      />
 
-      <div className="flex justify-center items-center my-auto select-none">
-        <div className="flex flex-shrink-0 justify-center items-center w-[16.25rem] h-[14.5rem]">
-          <div className="flex-shrink-0 w-[16.25rem] h-[14.5rem]">
-            <div className="flex-shrink-0 relaztive w-[16.25rem] h-[14.5rem]">
-              <div className="shadowZ absolute flex-shrink-0 w-[16.25rem] h-[14.5rem] rounded-[0.625rem] bg-white p-5"></div>
-              <div className="absolute z-50 alert_backing flex-shrink-0 w-[16.25rem] h-[14.5rem] rounded-[0.625rem] bg-[#f6f6f6]/[.60] p-3">
-                <div className="flex justify-center items-center space-y-5 flex-col mt-4">
-                  <img
-                    src="/static/images/no-app-icon.png"
-                    className="w-16 h-16"
-                  />
-                  <p className="text-md font-semibold text-black mt-2">
-                    Eh bien, c'est un peu vide ici...
-                  </p>
-                  <span className="text-xs text-center text-black mt-1">
-                    Je dois te dire que la reproduction de MacOS Sonoma est très
-                    loin d'être fini.
-                  </span>
-                </div>
-              </div>
-              <div className="inner_shadow flex-shrink-0 w-[16.25rem] h-[14.5rem] rounded-[0.625rem] bg-black/0" />
-              <div className="flex flex-shrink-0 justify-center items-center w-5 h-5"></div>
-            </div>
-          </div>
-        </div>
-      </div>
       <Dock />
     </>
   );

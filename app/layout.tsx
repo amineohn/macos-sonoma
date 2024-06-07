@@ -1,8 +1,10 @@
-"use client";
-import { StoreProvider } from "easy-peasy";
 import "./globals.css";
-import { useStore } from "./store";
-import { ThemeProvider } from "next-themes";
+import { Providers } from "./components/providers";
+export const metadata = {
+  title: "MacOS Sonoma",
+  description: "Reproduction of MacOS Sonoma",
+  metadataBase: new URL("https://macos.amineohn.me"),
+};
 
 export default function RootLayout({
   children,
@@ -11,16 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
   pageProps: any;
 }) {
-  const store = useStore(pageProps?.ssrStoreState);
-
   return (
     <html lang="en">
       <body>
-        <StoreProvider store={store}>
-          <ThemeProvider attribute="class" defaultTheme="light">
-            {children}
-          </ThemeProvider>
-        </StoreProvider>
+        <Providers pageProps={pageProps}>{children}</Providers>
       </body>
     </html>
   );
