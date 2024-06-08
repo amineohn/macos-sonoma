@@ -1,5 +1,5 @@
 import "./globals.css";
-import Providers from "./components/providers";
+import { Providers } from "./components/providers";
 export const metadata = {
   title: "MacOS Sonoma",
   description: "Reproduction of MacOS Sonoma",
@@ -8,15 +8,13 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  pageProps,
 }: {
   children: React.ReactNode;
-  pageProps: any;
 }) {
   return (
     <html lang="en">
       <body>
-        <Providers children={children} pageProps={pageProps} />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

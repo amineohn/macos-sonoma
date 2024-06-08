@@ -1,7 +1,6 @@
-"use client";
 import { useRef, memo, useState } from "react";
-import { useStoreActions } from "../store";
 import { LaunchPad } from "./launchpad";
+
 interface DockButton {
   title: string;
   logo: string;
@@ -11,10 +10,11 @@ interface DockButton {
 interface DockProps {
   openLaunchPad?: boolean;
 }
+
 const Dock = ({ openLaunchPad }: DockProps) => {
   const dockButtonsWrapper = useRef<HTMLDivElement>(null);
-  const closeMenu = useStoreActions((actions) => actions.menuBar.closeMenu);
   const [openLaunchpad, setOpenLaunchpad] = useState(false);
+
   const dockButtons: DockButton[] = [
     {
       title: "Finder",
@@ -27,7 +27,6 @@ const Dock = ({ openLaunchPad }: DockProps) => {
         setOpenLaunchpad(openLaunchPad ? false : true);
       },
     },
-
     {
       title: "Safari",
       logo: "/static/images/safari-logo.png",
@@ -87,31 +86,26 @@ const Dock = ({ openLaunchPad }: DockProps) => {
     const buttonElements = dockButtonsWrapper.current?.children;
 
     if (buttonElements) {
-      if (buttonElements) {
-        (
-          buttonElements[itemIndex] as HTMLElement
-        ).style.width = `${expandSize}rem`;
+      (
+        buttonElements[itemIndex] as HTMLElement
+      ).style.width = `${expandSize}rem`;
 
-        if (itemIndex > 0 && buttonElements[itemIndex - 1]) {
-          (buttonElements[itemIndex - 1] as HTMLElement).style.width = `${
-            expandSize - 1.5
-          }rem`;
-        }
+      if (itemIndex > 0 && buttonElements[itemIndex - 1]) {
+        (buttonElements[itemIndex - 1] as HTMLElement).style.width = `${
+          expandSize - 1.5
+        }rem`;
+      }
 
-        if (itemIndex > 1 && buttonElements[itemIndex - 2]) {
-          (buttonElements[itemIndex - 2] as HTMLElement).style.width = `${
-            expandSize - 2.5
-          }rem`;
-        }
+      if (itemIndex > 1 && buttonElements[itemIndex - 2]) {
+        (buttonElements[itemIndex - 2] as HTMLElement).style.width = `${
+          expandSize - 2.5
+        }rem`;
+      }
 
-        if (
-          itemIndex < dockButtons.length - 1 &&
-          buttonElements[itemIndex + 1]
-        ) {
-          (buttonElements[itemIndex + 1] as HTMLElement).style.width = `${
-            expandSize - 1.5
-          }rem`;
-        }
+      if (itemIndex < dockButtons.length - 1 && buttonElements[itemIndex + 1]) {
+        (buttonElements[itemIndex + 1] as HTMLElement).style.width = `${
+          expandSize - 1.5
+        }rem`;
       }
 
       if (itemIndex < dockButtons.length - 2 && buttonElements[itemIndex + 2]) {
@@ -157,9 +151,8 @@ const Dock = ({ openLaunchPad }: DockProps) => {
     }
   };
 
-  const handleItemsClick = () => {
-    closeMenu();
-  };
+  const handleItemsClick = () => {};
+
   return (
     <>
       <LaunchPad
