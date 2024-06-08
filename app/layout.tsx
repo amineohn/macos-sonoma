@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers pageProps={pageProps}>{children}</Providers>
+        <Providers children={children} pageProps={pageProps} />
       </body>
     </html>
   );
