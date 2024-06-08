@@ -5,7 +5,7 @@ import { Icons } from "./icons";
 import { LockScreen } from "./lockscreen";
 import { Toast } from "./ui/toast";
 
-export const MainContent = () => {
+export function MainContent() {
   return (
     <>
       <motion.div
@@ -33,6 +33,4 @@ export const MainContent = () => {
       <LockScreen />
     </>
   );
-};
-
-export default MainContent;
+}

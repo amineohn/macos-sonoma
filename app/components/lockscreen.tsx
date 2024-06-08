@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-
 export function LockScreen() {
   const router = useRouter();
 

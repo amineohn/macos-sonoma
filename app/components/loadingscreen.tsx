@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Icons } from "./icons";
 import { motion } from "framer-motion";
 import { set, get } from "js-cookie";
+import { MainContent } from "./main-content";
 
 export const LoadingScreen = () => {
   const [showLoading, setShowLoading] = useState(false);
@@ -63,6 +64,8 @@ export const LoadingScreen = () => {
         ></div>
       </div>
     </motion.div>
-  ) : null;
+  ) : (
+    <MainContent />
+  );
 };
 export default LoadingScreen;
