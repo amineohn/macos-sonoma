@@ -7,7 +7,9 @@ const LoadingScreen = dynamic(() => import("./components/loadingscreen"), {
 export default function Page() {
   return (
     <>
-      <LoadingScreen />
+      <div className="background">
+        <LoadingScreen />
+      </div>
     </>
   );
 }

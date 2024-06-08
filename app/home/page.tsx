@@ -3,7 +3,7 @@ import { MenuBar } from "../components/menu-bar";
 import { Toast } from "../components/ui/toast";
 export default function Page() {
   return (
-    <>
+    <div className="background">
       <MenuBar />
       <div className="p-3 hidden">
         <div className="flex justify-end select-none space-x-2">
@@ -80,6 +80,6 @@ export default function Page() {
       />
 
       <Dock />
-    </>
+    </div>
   );
 }
