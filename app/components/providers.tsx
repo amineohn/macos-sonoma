@@ -3,7 +3,7 @@ import { StoreProvider } from "easy-peasy";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import { useStore } from "../store";
-export function Providers({
+export default function Providers({
   children,
   pageProps,
 }: {

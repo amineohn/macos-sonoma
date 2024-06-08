@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./components/providers";
+import Providers from "./components/providers";
 export const metadata = {
   title: "MacOS Sonoma",
   description: "Reproduction of MacOS Sonoma",
