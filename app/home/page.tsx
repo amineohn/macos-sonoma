@@ -1,4 +1,3 @@
-"use client";
 import Dock from "../components/dock";
 import { MenuBar } from "../components/menu-bar";
 import { Toast } from "../components/ui/toast";

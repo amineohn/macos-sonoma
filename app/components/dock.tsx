@@ -1,3 +1,4 @@
+"use client";
 import { useRef, memo, useState } from "react";
 import { LaunchPad } from "./launchpad";
 
