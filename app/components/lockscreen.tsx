@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 export function LockScreen() {
   const router = useRouter();
-
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [messageAttempt, setMessageAttempt] = useState("");
   const [time, setTime] = useState(
     new Date()
       .toLocaleTimeString("fr-FR", {
@@ -58,10 +59,23 @@ export function LockScreen() {
     if (input && input.value === "password") {
       router.push("/home");
     } else if (input) {
-      setInterval(() => {
-        input.classList.remove("animate-shake", "animate-thrice");
-      }, 1000);
-      input.classList.add("animate-shake", "animate-thrice");
+      setFailedAttempts((prev) => {
+        const newAttempts = prev + 1;
+        if (newAttempts >= 3) {
+          setMessageAttempt("Oops, 3 attempts failed.");
+          const animationElements =
+            document.getElementsByClassName("animation");
+          for (let i = 0; i < animationElements.length; i++) {
+            animationElements[i].classList.add("animate__fadeIn");
+          }
+        } else {
+          setTimeout(() => {
+            input.classList.remove("animate-shake", "animate-thrice");
+          }, 1000);
+          input.classList.add("animate-shake", "animate-thrice");
+        }
+        return newAttempts;
+      });
       input.value = "";
     }
   }
@@ -99,6 +113,11 @@ export function LockScreen() {
             placeholder="Enter Password"
             className="input bg-white/30 outline-none border-none rounded-full backdrop-blur-md text-white placeholder-white/70 py-1 px-3 focus:ring-0 w-40 font-medium text-xs select-none"
           />
+          {messageAttempt && (
+            <p className="animation text-white/90 text-xs text-center mt-2">
+              {messageAttempt}
+            </p>
+          )}
         </form>
       </motion.div>
     </>
