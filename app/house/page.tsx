@@ -2,7 +2,7 @@ import { TbHomeFilled } from "react-icons/tb";
 import { getCurrentPlaying } from "../actions/get-current-playing";
 
 export default async function Page() {
-  const data = await getCurrentPlaying();
+  //const data = await getCurrentPlaying();
   return (
     <>
       <div className="absolute">
@@ -15,7 +15,7 @@ export default async function Page() {
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl">
-            {data ? (
+            {/*data ? (
               <div className="absolute">
                 <div>
                   <img
@@ -28,7 +28,7 @@ export default async function Page() {
               </div>
             ) : (
               <div>No data available</div>
-            )}
+            )*/}
           </div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
