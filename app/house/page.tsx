@@ -1,5 +1,6 @@
 import { TbHomeFilled } from "react-icons/tb";
 import { NowPlaying } from "../components/now-playing";
+import { DiscordUser } from "../components/discord-user";
 
 export default async function Page() {
   return (
@@ -16,7 +17,7 @@ export default async function Page() {
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl">
             <NowPlaying />
           </div>
-          <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
+          <DiscordUser />
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
