@@ -1,5 +1,5 @@
 import { TbHomeFilled } from "react-icons/tb";
-import { AlbumImage } from "../components/album-image";
+import { NowPlaying } from "../components/now-playing";
 
 export default async function Page() {
   return (
@@ -14,7 +14,7 @@ export default async function Page() {
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl">
-            <AlbumImage />
+            <NowPlaying />
           </div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>
           <div className="bg-gray-50/30 ring-2 hover:ring transition hover:ring-offset-2 ring-neutral-300/20 w-64 h-56 rounded-xl"></div>

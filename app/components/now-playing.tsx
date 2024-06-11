@@ -5,7 +5,7 @@ import { getCurrentPlaying } from "../actions/get-current-playing";
 import { CurrentlyPlaying } from "../types/spotify";
 import { RiMusicFill } from "react-icons/ri";
 
-export function AlbumImage() {
+export function NowPlaying() {
   const [shadowColor, setShadowColor] = useState("rgba(0, 0, 0, 0.3)");
   const [data, setData] = useState<CurrentlyPlaying | null>(null);
 
