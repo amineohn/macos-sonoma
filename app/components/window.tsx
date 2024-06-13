@@ -1,5 +1,5 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
-import { Icons } from "./icons";
 
 export function Window({ children }: { children: React.ReactNode }) {
   const [isDragging, setIsDragging] = useState(false);
@@ -15,36 +15,40 @@ export function Window({ children }: { children: React.ReactNode }) {
   const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isDragging || isResizing) {
-      windowRef.current!.style.transition = "none";
-    } else {
-      windowRef.current!.style.transition = "all 0.2s ease-out";
-    }
+    const handleTransition = () => {
+      if (windowRef.current) {
+        windowRef.current.style.transition =
+          isDragging || isResizing ? "none" : "all 0.2s ease-out";
+      }
+    };
+
+    handleTransition();
   }, [isDragging, isResizing]);
+
   useEffect(() => {
     const handleResize = () => {
       if (windowRef.current) {
-        const windowWidth = windowRef.current.offsetWidth;
-        const windowHeight = windowRef.current.offsetHeight;
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
+        const { offsetWidth: windowWidth, offsetHeight: windowHeight } =
+          windowRef.current;
+        const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
         setPosition({
           x: (screenWidth - windowWidth) / 2,
           y: (screenHeight - windowHeight) / 2,
         });
       }
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    const windowTop = windowRef.current!.getBoundingClientRect().top;
+    const { left, top } = windowRef.current!.getBoundingClientRect();
     setIsDragging(true);
     setDragOffset({
-      x: event.clientX - windowRef.current!.getBoundingClientRect().left,
-      y: event.clientY - windowTop,
+      x: event.clientX - left,
+      y: event.clientY - top,
     });
   };
 
@@ -55,43 +59,43 @@ export function Window({ children }: { children: React.ReactNode }) {
         y: event.clientY - dragOffset.y,
       });
     } else if (isResizing) {
-      const windowRect = windowRef.current!.getBoundingClientRect();
+      const { left, right, top, bottom } =
+        windowRef.current!.getBoundingClientRect();
       let newWidth = windowSize.width;
       let newHeight = windowSize.height;
+
       switch (resizeDirection) {
         case "n":
-          newHeight = windowRect.bottom - event.clientY + "px";
+          newHeight = `${bottom - event.clientY}px`;
           break;
         case "ne":
-          newWidth = event.clientX - windowRect.left + "px";
-          newHeight = windowRect.bottom - event.clientY + "px";
+          newWidth = `${event.clientX - left}px`;
+          newHeight = `${bottom - event.clientY}px`;
           break;
         case "e":
-          newWidth = event.clientX - windowRect.left + "px";
+          newWidth = `${event.clientX - left}px`;
           break;
         case "se":
-          newWidth = event.clientX - windowRect.left + "px";
-          newHeight = event.clientY - windowRect.top + "px";
+          newWidth = `${event.clientX - left}px`;
+          newHeight = `${event.clientY - top}px`;
           break;
         case "s":
-          newHeight = event.clientY - windowRect.top + "px";
+          newHeight = `${event.clientY - top}px`;
           break;
         case "sw":
-          newWidth = windowRect.right - event.clientX + "px";
-          newHeight = event.clientY - windowRect.top + "px";
+          newWidth = `${right - event.clientX}px`;
+          newHeight = `${event.clientY - top}px`;
           break;
         case "w":
-          newWidth = windowRect.right - event.clientX + "px";
+          newWidth = `${right - event.clientX}px`;
           break;
         case "nw":
-          newWidth = windowRect.right - event.clientX + "px";
-          newHeight = windowRect.bottom - event.clientY + "px";
+          newWidth = `${right - event.clientX}px`;
+          newHeight = `${bottom - event.clientY}px`;
           break;
       }
-      setWindowSize({
-        width: newWidth,
-        height: newHeight,
-      });
+
+      setWindowSize({ width: newWidth, height: newHeight });
     }
   };
 
@@ -109,52 +113,42 @@ export function Window({ children }: { children: React.ReactNode }) {
     event.stopPropagation();
   };
 
-  const onClick = () => {
-    const windowRect = windowRef.current!.getBoundingClientRect();
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+  const handleClick = () => {
+    const { width, height } = windowRef.current!.getBoundingClientRect();
+    const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
     setPosition({
-      x: (screenWidth - windowRect.width) / 2,
-      y: (screenHeight - windowRect.height) / 2,
+      x: (screenWidth - width) / 2,
+      y: (screenHeight - height) / 2,
     });
   };
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
-    const windowRect = windowRef.current!.getBoundingClientRect();
-    const x = event.clientX - windowRect.left;
-    const y = event.clientY - windowRect.top;
-    const top = y < 10;
-    const bottom = y > windowRect.height - 10;
-    const left = x < 10;
-    const right = x > windowRect.width - 10;
-    if (top && left) {
-      setResizeDirection("nw");
-    } else if (top && right) {
-      setResizeDirection("ne");
-    } else if (bottom && left) {
-      setResizeDirection("sw");
-    } else if (bottom && right) {
-      setResizeDirection("se");
-    } else if (top) {
-      setResizeDirection("n");
-    } else if (right) {
-      setResizeDirection("e");
-    } else if (bottom) {
-      setResizeDirection("s");
-    } else if (left) {
-      setResizeDirection("w");
-    } else {
-      setResizeDirection("");
-    }
+    const { left, top, width, height } =
+      windowRef.current!.getBoundingClientRect();
+    const x = event.clientX - left;
+    const y = event.clientY - top;
+    const topEdge = y < 10;
+    const bottomEdge = y > height - 10;
+    const leftEdge = x < 10;
+    const rightEdge = x > width - 10;
+
+    if (topEdge && leftEdge) setResizeDirection("nw");
+    else if (topEdge && rightEdge) setResizeDirection("ne");
+    else if (bottomEdge && leftEdge) setResizeDirection("sw");
+    else if (bottomEdge && rightEdge) setResizeDirection("se");
+    else if (topEdge) setResizeDirection("n");
+    else if (rightEdge) setResizeDirection("e");
+    else if (bottomEdge) setResizeDirection("s");
+    else if (leftEdge) setResizeDirection("w");
+    else setResizeDirection("");
   };
 
   useEffect(() => {
-    const windowRect = windowRef.current!.getBoundingClientRect();
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+    const { width, height } = windowRef.current!.getBoundingClientRect();
+    const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
     setPosition({
-      x: (screenWidth - windowRect.width) / 2,
-      y: (screenHeight - windowRect.height) / 2,
+      x: (screenWidth - width) / 2,
+      y: (screenHeight - height) / 2,
     });
   }, []);
 
@@ -170,7 +164,7 @@ export function Window({ children }: { children: React.ReactNode }) {
           "0px 0.5px 0px 0px rgba(0, 0, 0, 0.15), 0px -0.5px 0px 0px rgba(0, 0, 0, 0.05) inset",
       }}
       ref={windowRef}
-      onMouseMove={handleMouseMove as any}
+      onMouseMove={(event) => handleMouseMove(event as unknown as MouseEvent)}
       onMouseUp={handleMouseUp}
       onMouseEnter={handleMouseEnter}
     >
@@ -180,13 +174,10 @@ export function Window({ children }: { children: React.ReactNode }) {
       >
         <div className="flex items-center space-x-2 h-6">
           <div className="w-[13px] h-[13px] bg-[#EE6A5F] border border-[#CE5347] rounded-full" />
-          <div
-            className="w-[13px] h-[13px] bg-[#F5BD4F] border border-[#D6A243] rounded-full"
-            onClick={handleMouseDown}
-          />
+          <div className="w-[13px] h-[13px] bg-[#F5BD4F] border border-[#D6A243] rounded-full" />
           <div
             className="w-[13px] h-[13px] bg-[#61C454] border border-[#58A942] rounded-full cursor-pointer"
-            onClick={onClick}
+            onClick={handleClick}
           />
         </div>
       </div>
