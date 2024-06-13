@@ -1,7 +1,6 @@
 import Dock from "../components/dock";
 import { MenuBar } from "../components/menu-bar";
 import { Toast } from "../components/ui/toast";
-import { Window } from "../components/window";
 export default function Page() {
   return (
     <div className="background">
@@ -80,7 +79,6 @@ export default function Page() {
         }
         time="maintenant"
       />
-      <Window children={<>test</>} />
       <Dock />
     </div>
   );
