@@ -32,6 +32,7 @@ export function LockScreen() {
     times.forEach((time) => {
       time.classList.add("transition-all", "duration-500");
     });
+
     const interval = setInterval(() => {
       setTime(
         new Date()
@@ -82,20 +83,21 @@ export function LockScreen() {
   return (
     <>
       <motion.div
-        className="flex flex-col justify-center items-center mt-20"
+        className="transition-all ease-in-out flex flex-col justify-center items-center mt-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
+        key={time}
       >
-        <p className="date bg-clip-text text-transparent bg-gradient-to-r from-white/60 to-white/60 font-semibold text-xl select-none text-backdrop-blur">
+        <p className="date bg-clip-text text-transparent bg-gradient-to-r from-white/60 to-white/60 font-semibold text-lg select-none">
           {date}
         </p>
-        <p className="time bg-clip-text text-transparent bg-gradient-to-r from-white/60 to-white/60 font-bold text-8xl select-none text-backdrop-blur">
+        <p className="time bg-clip-text text-transparent bg-gradient-to-r from-white/60 to-white/60 font-bold text-6xl select-none">
           {time}
         </p>
       </motion.div>
       <motion.div
-        className="absolute bottom-0 left-0 right-0 flex flex-col justify-center items-center mb-10 space-y-2"
+        className="absolute bottom-0 left-0 right-0 flex flex-col justify-center items-center mb-14 space-y-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
@@ -111,7 +113,7 @@ export function LockScreen() {
           <input
             type="password"
             placeholder="Enter Password"
-            className="input bg-white/30 outline-none border-none rounded-full backdrop-blur-md text-white placeholder-white/70 py-1 px-3 focus:ring-0 w-40 font-medium text-xs select-none"
+            className="input bg-white/30 outline-none border-none rounded-full backdrop-blur-md text-white placeholder-white/60 py-1 px-3 focus:ring-0 w-40 font-medium text-xs select-none"
           />
           {messageAttempt && (
             <p className="animation text-white/90 text-xs text-center mt-2">

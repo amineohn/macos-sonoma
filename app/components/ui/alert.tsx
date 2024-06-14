@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+"use client";
+import { ReactNode, useEffect } from "react";
 
 export function Alert({
   title,
@@ -9,8 +10,18 @@ export function Alert({
   message: ReactNode;
   image: string;
 }) {
+  useEffect(() => {
+    const el = document.getElementById("alert");
+
+    setInterval(() => {
+      el?.classList.add("hidden");
+    }, 5000);
+  });
   return (
-    <div className="flex justify-center items-center my-auto select-none">
+    <div
+      id="alert"
+      className="flex justify-center items-center my-auto select-none"
+    >
       <div className="flex flex-shrink-0 justify-center items-center w-[16.25rem] h-[14.5rem]">
         <div className="flex-shrink-0 w-[16.25rem] h-[14.5rem]">
           <div className="flex-shrink-0 relaztive w-[16.25rem] h-[14.5rem]">

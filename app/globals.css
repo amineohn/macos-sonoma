@@ -60,3 +60,15 @@
   --un-text-opacity: 1;
   color: rgba(55, 65, 81, var(--un-text-opacity));
 }
+.move {
+  animation: move linear 1s infinite;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0vh);
+  }
+  to {
+    transform: translateY(-20vh);
+  }
+}
