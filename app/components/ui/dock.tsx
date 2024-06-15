@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, memo, useState } from "react";
-import { LaunchPad } from "./launchpad";
+import { LaunchPad } from "~/app/components/apps/launchpad";
 
 interface DockButton {
   title: string;

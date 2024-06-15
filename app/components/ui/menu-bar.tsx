@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Icons } from "~/app/components/icons";
+import { Icons } from "~/app/components/ui/icons";
 import { useTheme } from "next-themes";
 import { getFormattedTime } from "~/app/utils/get-formatted-time";
 import { getFormattedDate } from "~/app/utils/get-formatted-date";

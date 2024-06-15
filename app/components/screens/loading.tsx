@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Icons } from "~/app/components/icons";
+import { Icons } from "~/app/components/ui/icons";
 import { motion } from "framer-motion";
 import { set, get } from "js-cookie";
-import { MainContent } from "~/app/components/main-content";
+import { MainContent } from "~/app/components/screens/main-content";
 
 export function LoadingScreen() {
   const [showLoading, setShowLoading] = useState(false);

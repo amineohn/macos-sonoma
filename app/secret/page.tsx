@@ -1,6 +1,6 @@
 import { TbHomeFilled } from "react-icons/tb";
-import { DiscordUser } from "../components/discord-user";
-import { NowPlaying } from "../components/now-playing";
+import { DiscordUser } from "~/app/components/features/discord-user";
+import { NowPlaying } from "~/app/components/features/now-playing";
 
 export default async function Page() {
   return (

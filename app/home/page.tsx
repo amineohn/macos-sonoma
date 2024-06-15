@@ -1,5 +1,5 @@
-import Dock from "../components/dock";
-import { MenuBar } from "../components/menu-bar";
+import Dock from "../components/ui/dock";
+import { MenuBar } from "../components/ui/menu-bar";
 import { Toast } from "../components/ui/toast";
 import { Calendar } from "../components/widgets/calendar";
 import { Weather } from "../components/widgets/weather";

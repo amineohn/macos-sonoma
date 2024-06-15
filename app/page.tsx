@@ -1,4 +1,4 @@
-import { LoadingScreen } from "~/app/components/loadingscreen";
+import { LoadingScreen } from "~/app/components/screens/loading";
 
 export default function Page() {
   return (
