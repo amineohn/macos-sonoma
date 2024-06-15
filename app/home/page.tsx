@@ -7,18 +7,6 @@ export default function Page() {
   return (
     <div className="background">
       <MenuBar />
-      <div className="p-3">
-        <div className="flex justify-end select-none space-x-2">
-          <div className="flex flex-col items-center">
-            <div className="inline-flex items-center space-y-3 space-x-2">
-              <br />
-              <Weather />
-              <Calendar />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <Toast
         title={"Notification"}
         image="/static/images/no-app-icon.png"
@@ -30,6 +18,17 @@ export default function Page() {
         }
         time="maintenant"
       />
+      <div className="p-3">
+        <div className="flex justify-end select-none space-x-2">
+          <div className="flex flex-col items-center">
+            <div className="inline-flex items-center space-y-3 space-x-2">
+              <br />
+              <Weather />
+              <Calendar />
+            </div>
+          </div>
+        </div>
+      </div>
       <Dock />
     </div>
   );
