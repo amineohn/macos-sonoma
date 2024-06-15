@@ -1,60 +1,45 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Icons } from "./icons";
+import { Icons } from "~/app/components/icons";
 import { useTheme } from "next-themes";
+import { getFormattedTime } from "~/app/utils/get-formatted-time";
+import { getFormattedDate } from "~/app/utils/get-formatted-date";
 
 export function MenuBar() {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
-  const [open, setOpen] = useState({ control: false });
+  const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const currentDate = new Date();
-      const formattedTime = currentDate
-        .toLocaleTimeString("fr-FR", {
-          timeZone: "Europe/Paris",
-          hour12: false,
-        })
-        .slice(0, -3);
-      const formattedDate = currentDate.toLocaleDateString("fr-FR", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-
-      setTime(formattedTime);
-      setDate(formattedDate);
+      setTime(getFormattedTime());
+      setDate(getFormattedDate());
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
-
-  function capitalize(str: string) {
+  const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  };
 
-  function showDate() {
+  const showDate = () => {
     const currentDate = new Date();
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       weekday: "short",
       month: "short",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
     };
-    const formattedDate = new Intl.DateTimeFormat(
-      "fr-FR",
-      options as any
-    ).format(currentDate);
+    const formattedDate = new Intl.DateTimeFormat("fr-FR", options).format(
+      currentDate
+    );
     const capitalizedDate = capitalize(formattedDate);
 
     return capitalizedDate.replace(".,", " ").replace(".", "");
-  }
+  };
 
   return (
     <>
@@ -70,75 +55,37 @@ export function MenuBar() {
                     className="w-6 h-6 text-white opacity-100"
                   />
                 </div>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    Finder
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    File
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    Edit
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    View
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    Go
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    Window
-                  </p>
-                </button>
-                <button className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10">
-                  <p className="text-xs font-medium text-white mix-blend-hard-light">
-                    Help
-                  </p>
-                </button>
+                {["Finder", "File", "Edit", "View", "Go", "Window", "Help"].map(
+                  (item) => (
+                    <button
+                      key={item}
+                      className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10"
+                    >
+                      <p className="text-xs font-medium text-white mix-blend-hard-light">
+                        {item}
+                      </p>
+                    </button>
+                  )
+                )}
               </div>
               <div>
                 <div className="inline-flex items-center justify-center py-2">
-                  <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
-                    <Icons
-                      name="battery"
-                      className="w-7 h-6 ml-0.5 text-white opacity-100"
-                    />
-                  </div>
-                  <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
-                    <Icons
-                      name="wifi"
-                      className="w-6 h-6 text-white opacity-100"
-                    />
-                  </div>
-                  <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
-                    <Icons
-                      name="search"
-                      className="w-7 h-6 text-white opacity-100"
-                    />
-                  </div>
-                  <div
-                    className="hover:bg-white/10 px-1 py-0.5 rounded-md transition"
-                    onClick={() =>
-                      setOpen({
-                        control: open.control ? false : true,
-                      })
-                    }
-                  >
-                    <Icons
-                      name="control"
-                      className="w-7 h-6 text-white opacity-100"
-                    />
-                  </div>
+                  {["battery", "wifi", "search", "control"].map((icon) => (
+                    <div
+                      key={icon}
+                      className="hover:bg-white/10 px-1 py-0.5 rounded-md transition"
+                      onClick={
+                        icon === "control" ? () => setOpen(!open) : undefined
+                      }
+                    >
+                      <Icons
+                        name={icon}
+                        className={`w-${
+                          icon === "battery" ? "7" : "6"
+                        } h-6 text-white opacity-100`}
+                      />
+                    </div>
+                  ))}
                   <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
                     <span className="text-white px-2 mt-1 text-xs font-medium opacity-100">
                       {showDate()}
@@ -152,54 +99,44 @@ export function MenuBar() {
         <div className="absolute inset-0 bg-gray-700/50 flex px-2 justify-between items-center mix-blend-color-burn backdrop-filter backdrop-blur-[51.8036px] z-0"></div>
       </div>
 
-      {open.control && (
-        <>
-          <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
-            <div className="row-span-2 col-span-2 p-2 flex flex-col justify-around">
-              <div className="flex items-center space-x-2">
+      {open && (
+        <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
+          <div className="row-span-2 col-span-2 p-2 flex flex-col justify-around">
+            {[
+              { icon: "wifi", label: "Wi-Fi", status: "Home" },
+              { icon: "bluetooth", label: "Bluetooth", status: "On" },
+              {
+                icon: "rss-feed-rounded",
+                label: "AirDrop",
+                status: "Contacts Only",
+              },
+            ].map(({ icon, label, status }) => (
+              <div key={label} className="flex items-center space-x-2">
                 <div className="cc-btn">
-                  <span className="i-material-symbols:wifi text-base"></span>
+                  <span
+                    className={`i-material-symbols:${icon} text-base`}
+                  ></span>
                 </div>
                 <div className="flex flex-col pt-0.5">
-                  <span className="font-medium leading-4">Wi-Fi</span>
-                  <span className="cc-text">Home</span>
+                  <span className="font-medium leading-4">{label}</span>
+                  <span className="cc-text">{status}</span>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="cc-btn">
-                  <span className="i-charm:bluetooth text-base"></span>
-                </div>
-                <div className="flex flex-col pt-0.5">
-                  <span className="font-medium leading-4">Bluetooth</span>
-                  <span className="cc-text">On</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="cc-btn">
-                  <span className="i-material-symbols:rss-feed-rounded text-base"></span>
-                </div>
-                <div className="flex flex-col pt-0.5">
-                  <span className="font-medium leading-4">AirDrop</span>
-                  <span className="cc-text">Contacts Only</span>
-                </div>
-              </div>
+            ))}
+          </div>
+          <div className="flex items-center col-span-2 p-2 space-x-2">
+            <div className="cc-btn">
+              <Icons
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                name={theme === "dark" ? "light" : "moon"}
+                className="w-5 h-5"
+              />
             </div>
-            <div className="flex items-center col-span-2 p-2 space-x-2">
-              <div className="cc-btn">
-                <Icons
-                  onClick={() =>
-                    theme == "dark" ? setTheme("light") : setTheme("dark")
-                  }
-                  name={theme == "dark" ? "light" : "moon"}
-                  className="w-5 h-5"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-medium ml-1">Light Mode</span>
-              </div>
+            <div className="flex flex-col">
+              <span className="font-medium ml-1">Light Mode</span>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

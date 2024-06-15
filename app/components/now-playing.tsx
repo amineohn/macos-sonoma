@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ColorThief from "colorthief";
 import { RiMusicFill } from "react-icons/ri";
 import { useLanyard } from "react-use-lanyard";
-import { ProgressBar } from "./progress-bar";
+import { ProgressBar } from "~/app/components/progress-bar";
 import { AiOutlineLoading } from "react-icons/ai";
 import { IoWarning } from "react-icons/io5";
 

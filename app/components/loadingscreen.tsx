@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Icons } from "./icons";
+import { Icons } from "~/app/components/icons";
 import { motion } from "framer-motion";
 import { set, get } from "js-cookie";
-import { MainContent } from "./main-content";
+import { MainContent } from "~/app/components/main-content";
 
-export const LoadingScreen = () => {
+export function LoadingScreen() {
   const [showLoading, setShowLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -20,26 +20,23 @@ export const LoadingScreen = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowLoading(false);
       }, 1000);
+
+      return () => clearTimeout(timer);
     }
   }, [progress]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress >= 100) {
-          clearInterval(interval);
-          return 100;
-        } else {
-          return prevProgress + 10;
-        }
-      });
-    }, 700);
+    if (showLoading) {
+      const interval = setInterval(() => {
+        setProgress((prevProgress) => Math.min(prevProgress + 10, 100));
+      }, 700);
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }
+  }, [showLoading]);
 
   const variants = {
     initial: { opacity: 0 },
@@ -67,5 +64,4 @@ export const LoadingScreen = () => {
   ) : (
     <MainContent />
   );
-};
-export default LoadingScreen;
+}

@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Icons } from "./icons";
-import { LockScreen } from "./lockscreen";
-import { Toast } from "./ui/toast";
+import { Icons } from "~/app/components/icons";
+import { LockScreen } from "~/app/components/lockscreen";
+import { Toast } from "~/app/components/ui/toast";
 
 export function MainContent() {
   return (

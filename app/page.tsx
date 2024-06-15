@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-
-const LoadingScreen = dynamic(() => import("./components/loadingscreen"), {
-  ssr: false,
-});
+import { LoadingScreen } from "~/app/components/loadingscreen";
 
 export default function Page() {
   return (

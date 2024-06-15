@@ -1,4 +1,4 @@
-import { Icons } from "../icons";
+import { Icons } from "~/app/components/icons";
 
 interface ControlCenterProps {
   isOpen: boolean;
