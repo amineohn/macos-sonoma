@@ -9,11 +9,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        spinOnce: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        spinOnce: "spinOnce 1s ease-in-out",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+    },
+  },
+  variants: {
+    extend: {
+      animation: ["hover"],
     },
   },
   plugins: [require("tailwindcss-animated")],

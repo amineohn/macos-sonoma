@@ -2,84 +2,81 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { IoRefresh } from "react-icons/io5";
+import { getCurrentTime } from "~/app/utils/get-current-time";
+import { getCurrentDate } from "~/app/utils/get-current-date";
 export function LockScreen() {
   const router = useRouter();
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [messageAttempt, setMessageAttempt] = useState("");
-  const [time, setTime] = useState(
-    new Date()
-      .toLocaleTimeString("fr-FR", {
-        timeZone: "Europe/Paris",
-        hour12: false,
-      })
-      .slice(0, -3)
-  );
-  const [date, setDate] = useState(
-    new Date().toLocaleDateString("fr-FR", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-  );
+  const [time, setTime] = useState(getCurrentTime());
+  const [date, setDate] = useState(getCurrentDate());
 
   useEffect(() => {
-    const dates = document.querySelectorAll(".date");
-    const times = document.querySelectorAll(".time");
-    dates.forEach((date) => {
-      date.classList.add("transition-all", "duration-500");
-    });
-    times.forEach((time) => {
-      time.classList.add("transition-all", "duration-500");
-    });
+    const alreadyLogged = localStorage.getItem("already-logged");
+    if (alreadyLogged) {
+      router.push("/home");
+    }
+  }, [router]);
 
-    const interval = setInterval(() => {
-      setTime(
-        new Date()
-          .toLocaleTimeString("fr-FR", {
-            timeZone: "Europe/Paris",
-            hour12: false,
-          })
-          .slice(0, -3)
-      );
-      setDate(
-        new Date().toLocaleDateString("fr-FR", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      );
-    }, 1000);
+  useEffect(() => {
+    const updateDateTime = () => {
+      setTime(getCurrentTime());
+      setDate(getCurrentDate());
+    };
+
+    const interval = setInterval(updateDateTime, 1000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    const elements = document.querySelectorAll(".date, .time");
+    elements.forEach((el) => {
+      el.classList.add("transition-all", "duration-500");
+    });
+  }, []);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const input = (e.target as HTMLFormElement).querySelector("input");
-    if (input && input.value === "password") {
-      router.push("/home");
-    } else if (input) {
-      setFailedAttempts((prev) => {
-        const newAttempts = prev + 1;
-        if (newAttempts >= 3) {
-          setMessageAttempt("Oops, 3 attempts failed.");
-          const animationElements =
-            document.getElementsByClassName("animation");
-          for (let i = 0; i < animationElements.length; i++) {
-            animationElements[i].classList.add("animate__fadeIn");
-          }
-        } else {
-          setTimeout(() => {
-            input.classList.remove("animate-shake", "animate-thrice");
-          }, 1000);
-          input.classList.add("animate-shake", "animate-thrice");
-        }
-        return newAttempts;
-      });
+
+    if (input) {
+      if (input.value === "password") {
+        router.push("/home");
+        localStorage.setItem("already-logged", "true");
+      } else {
+        handleFailedAttempt(input);
+      }
       input.value = "";
     }
-  }
+  };
+
+  const handleFailedAttempt = (input: HTMLInputElement) => {
+    setFailedAttempts((prev) => {
+      const newAttempts = prev + 1;
+      const animationElements = document.getElementsByClassName("animation");
+      const passwordFailedElements =
+        document.getElementsByClassName("password-failed");
+
+      if (newAttempts >= 3) {
+        setMessageAttempt("Oops, 3 attempts failed.");
+        Array.from(animationElements).forEach((element) => {
+          element.classList.add("animate__fadeIn");
+        });
+        Array.from(passwordFailedElements).forEach((element) => {
+          element.classList.add("disabled:bg-gray-200");
+        });
+      } else {
+        input.classList.add("animate-shake", "animate-thrice");
+        setTimeout(() => {
+          input.classList.remove("animate-shake", "animate-thrice");
+        }, 1000);
+      }
+
+      return newAttempts;
+    });
+  };
+
   return (
     <>
       <motion.div
@@ -110,12 +107,23 @@ export function LockScreen() {
           Amine OUHANI
         </p>
         <form onSubmit={onSubmit}>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            className="input bg-white/30 outline-none border-none rounded-full backdrop-blur-md text-white placeholder-white/60 py-1 px-3 focus:ring-0 w-40 font-medium text-xs select-none"
-          />
-          {messageAttempt && (
+          <div className="inline-flex items-center space-x-2">
+            <input
+              type="password"
+              placeholder="Enter Password"
+              className="input password-failed bg-white/30 outline-none border-none rounded-full backdrop-blur-md text-white placeholder-white/60 py-1 px-3 focus:ring-0 w-40 font-medium text-xs select-none"
+              disabled={failedAttempts === 3}
+            />
+            {failedAttempts === 3 && (
+              <IoRefresh
+                onClick={() => {
+                  setFailedAttempts(0);
+                }}
+                className="text-white hover:animate-spinOnce cursor-pointer"
+              />
+            )}
+          </div>
+          {failedAttempts === 3 && (
             <p className="animation text-white/90 text-xs text-center mt-2">
               {messageAttempt}
             </p>
