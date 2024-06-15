@@ -1,4 +1,4 @@
-import { topTracks } from "@/app/lib/spotify";
+import { topTracks } from "~/app/lib/spotify";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
