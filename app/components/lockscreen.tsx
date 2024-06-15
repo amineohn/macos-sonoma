@@ -64,7 +64,7 @@ export function LockScreen() {
           element.classList.add("animate__fadeIn");
         });
         Array.from(passwordFailedElements).forEach((element) => {
-          element.classList.add("disabled:bg-gray-200");
+          element.classList.add("border", "border-red-500/70");
         });
       } else {
         input.classList.add("animate-shake", "animate-thrice");
