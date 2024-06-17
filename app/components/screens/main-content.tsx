@@ -14,8 +14,14 @@ export function MainContent() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <Icons name="battery" className="w-6 h-6 text-white mr-2" />
-        <Icons name="wifi" className="w-6 h-6 text-white mr-2" />
+        <Icons
+          name="battery"
+          className="w-6 h-6 text-black hover:cursor-clicking mr-2"
+        />
+        <Icons
+          name="wifi"
+          className="w-6 h-6 text-black hover:cursor-clicking mr-2"
+        />
       </motion.div>
 
       <Toast

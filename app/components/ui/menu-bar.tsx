@@ -49,19 +49,19 @@ export function MenuBar() {
           <div className="absolute top-0 w-full z-50">
             <div className="flex items-center w-full justify-between h-9 px-1">
               <div className="inline-flex items-center space-x-1.5">
-                <div className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition">
+                <div className="hover:bg-black/5 px-1.5 py-1.5 rounded-md transition">
                   <Icons
                     name="apple"
-                    className="w-6 h-6 text-white opacity-100"
+                    className="w-6 h-6 text-black opacity-100"
                   />
                 </div>
                 {["Finder", "File", "Edit", "View", "Go", "Window", "Help"].map(
                   (item) => (
                     <button
                       key={item}
-                      className="hover:bg-white/10 px-1.5 py-1.5 rounded-md transition ml-10"
+                      className="hover:bg-black/5 px-1.5 py-1.5 rounded-md transition ml-10"
                     >
-                      <p className="text-xs font-medium text-white mix-blend-hard-light">
+                      <p className="text-xs font-medium text-black mix-blend-hard-light">
                         {item}
                       </p>
                     </button>
@@ -73,7 +73,7 @@ export function MenuBar() {
                   {["battery", "wifi", "search", "control"].map((icon) => (
                     <div
                       key={icon}
-                      className="hover:bg-white/10 px-1 py-0.5 rounded-md transition"
+                      className="hover:bg-black/5 px-1 py-0.5 rounded-md transition"
                       onClick={
                         icon === "control" ? () => setOpen(!open) : undefined
                       }
@@ -82,12 +82,12 @@ export function MenuBar() {
                         name={icon}
                         className={`w-${
                           icon === "battery" ? "7" : "6"
-                        } h-6 text-white opacity-100`}
+                        } h-6 text-black opacity-100`}
                       />
                     </div>
                   ))}
-                  <div className="hover:bg-white/10 px-1 py-0.5 rounded-md transition">
-                    <span className="text-white px-2 mt-1 text-xs font-medium opacity-100">
+                  <div className="hover:bg-black/5 px-1 py-0.5 rounded-md transition">
+                    <span className="text-black px-2 mt-1 text-xs font-medium opacity-100">
                       {showDate()}
                     </span>
                   </div>

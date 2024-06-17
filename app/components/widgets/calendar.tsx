@@ -35,7 +35,7 @@ export function Calendar() {
   const month = now.toLocaleString("default", { month: "long" }).toUpperCase();
 
   return (
-    <div className="w-[150px] h-[150px] rounded-2xl bg-white p-2">
+    <div className="w-[150px] h-[150px] rounded-2xl bg-white p-2 hidden">
       <div className="text-start text-red-500 font-bold mb-1 text-xs">
         {month}
       </div>
