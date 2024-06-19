@@ -1,8 +1,8 @@
-import { Dock } from "../components/ui/dock";
-import { MenuBar } from "../components/ui/menu-bar";
-import { Toast } from "../components/ui/notifications/toast";
-import { Calendar } from "../components/widgets/calendar";
-import { Weather } from "../components/widgets/weather";
+import { Dock } from "~/app/components/ui/dock";
+import { MenuBar } from "~/app/components/ui/menu-bar";
+import { Toast } from "~/app/components/ui/notifications/toast";
+import { Calendar } from "~/app/components/widgets/calendar";
+import { Weather } from "~/app/components/widgets/weather";
 export default function Page() {
   return (
     <div className="background">
