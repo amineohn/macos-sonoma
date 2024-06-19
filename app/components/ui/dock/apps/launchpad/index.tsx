@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { menuItems } from "~/app/components/ui/dock/apps/launchpad/apps.buttons.data";
-import { Buttons } from "./buttons";
+import { Button } from "./button";
 
 interface LaunchPadProps {
   openLaunchPad: boolean;
@@ -99,7 +99,7 @@ export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
           <div className="container mx-auto max-w-9xl mt-20">
             <div className="grid grid-cols-7 gap-3">
               {menuItems.map((item, index) => (
-                <Buttons index={index} image={item.image} label={item.label} />
+                <Button index={index} image={item.image} label={item.label} />
               ))}
             </div>
           </div>

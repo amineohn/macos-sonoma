@@ -1,4 +1,4 @@
-export function Buttons({
+export function Button({
   index,
   image,
   label,
