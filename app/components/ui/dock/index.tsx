@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
 import { LaunchPad } from "~/app/components/ui/dock/apps/launchpad";
-import { Window } from "~/app/components/ui/window";
 import { DockButton, setButtonWidth } from "~/app/components/ui/dock/button";
 import { dock_buttons } from "~/app/components/ui/dock/dock-buttons.data";
 export function Dock() {
@@ -74,16 +73,6 @@ export function Dock() {
 
   return (
     <>
-      <Window
-        children={
-          <>
-            <iframe
-              className="w-full h-full"
-              src="https://vscode.dev/github/amineohn/macos-sonoma"
-            />
-          </>
-        }
-      />
       <LaunchPad openLaunchPad={openLaunchpad} />
       <div
         ref={dockButtonsWrapper}
