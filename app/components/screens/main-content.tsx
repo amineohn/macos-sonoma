@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Icons } from "~/app/components/ui/icons";
 import { LockScreen } from "~/app/components/screens/lock";
-import { Toast } from "~/app/components/ui/toast";
+import { Toast } from "~/app/components/ui/notifications/toast";
 
 export function MainContent() {
   return (

@@ -1,15 +1,34 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 interface LaunchPadProps {
-  setOpenLaunchpad: (open: boolean) => void;
   openLaunchPad: boolean;
 }
 
-export function LaunchPad({ openLaunchPad, setOpenLaunchpad }: LaunchPadProps) {
+export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
   const launchpadRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(openLaunchPad);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(openLaunchPad);
+  }, [openLaunchPad]);
 
   useEffect(() => {
     const launchpad = launchpadRef.current;
@@ -22,7 +41,7 @@ export function LaunchPad({ openLaunchPad, setOpenLaunchpad }: LaunchPadProps) {
         "animate-reverse"
       );
     }
-    if (!openLaunchPad && launchpadAnimation) {
+    if (!isOpen && launchpadAnimation) {
       launchpad?.classList.add(
         "animate-fade",
         "animate-once",
@@ -31,26 +50,23 @@ export function LaunchPad({ openLaunchPad, setOpenLaunchpad }: LaunchPadProps) {
       );
       launchpad?.classList.add("overflow-hidden");
     }
-  }, [openLaunchPad]);
+  }, [isOpen]);
 
   const launchpadClasses = classNames(
     "bg-black/50 backdrop-filter backdrop-blur-xl absolute inset-0 z-50 transition-all ease-in-out launchpad",
     {
-      "overflow-hidden": !openLaunchPad,
+      "overflow-hidden": !isOpen,
     }
   );
 
   return (
     <>
-      {openLaunchPad && (
+      {isOpen && (
         <motion.div
           className={launchpadClasses}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          onMouseLeave={() => {
-            setOpenLaunchpad(false);
-          }}
           ref={launchpadRef}
         >
           <div className="flex justify-center flex-col items-center py-10">

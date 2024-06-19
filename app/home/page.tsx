@@ -1,6 +1,6 @@
-import Dock from "../components/ui/dock";
+import { Dock } from "../components/ui/dock";
 import { MenuBar } from "../components/ui/menu-bar";
-import { Toast } from "../components/ui/toast";
+import { Toast } from "../components/ui/notifications/toast";
 import { Calendar } from "../components/widgets/calendar";
 import { Weather } from "../components/widgets/weather";
 export default function Page() {

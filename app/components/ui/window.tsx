@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useRef, useState } from "react";
 
 export function Window({ children }: { children: React.ReactNode }) {
@@ -21,7 +20,6 @@ export function Window({ children }: { children: React.ReactNode }) {
           isDragging || isResizing ? "none" : "all 0.2s ease-out";
       }
     };
-
     handleTransition();
   }, [isDragging, isResizing]);
 
@@ -38,18 +36,26 @@ export function Window({ children }: { children: React.ReactNode }) {
       }
     };
 
-    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowRef.current) {
+      const { offsetWidth: windowWidth, offsetHeight: windowHeight } =
+        windowRef.current;
+      const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
+      setPosition({
+        x: (screenWidth - windowWidth) / 2,
+        y: (screenHeight - windowHeight) / 2,
+      });
+    }
   }, []);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     const { left, top } = windowRef.current!.getBoundingClientRect();
     setIsDragging(true);
-    setDragOffset({
-      x: event.clientX - left,
-      y: event.clientY - top,
-    });
+    setDragOffset({ x: event.clientX - left, y: event.clientY - top });
   };
 
   const handleMouseMove = (event: MouseEvent) => {
@@ -114,54 +120,48 @@ export function Window({ children }: { children: React.ReactNode }) {
   };
 
   const handleClick = () => {
-    const { width, height } = windowRef.current!.getBoundingClientRect();
-    const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
-    setPosition({
-      x: (screenWidth - width) / 2,
-      y: (screenHeight - height) / 2,
-    });
+    if (windowRef.current) {
+      const { width, height } = windowRef.current.getBoundingClientRect();
+      const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
+      setPosition({
+        x: (screenWidth - width) / 2,
+        y: (screenHeight - height) / 2,
+      });
+    }
   };
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top, width, height } =
-      windowRef.current!.getBoundingClientRect();
-    const x = event.clientX - left;
-    const y = event.clientY - top;
-    const topEdge = y < 10;
-    const bottomEdge = y > height - 10;
-    const leftEdge = x < 10;
-    const rightEdge = x > width - 10;
+    if (!isResizing && !isDragging) {
+      const { left, top, width, height } =
+        windowRef.current!.getBoundingClientRect();
+      const x = event.clientX - left;
+      const y = event.clientY - top;
+      const topEdge = y < 10;
+      const bottomEdge = y > height - 10;
+      const leftEdge = x < 10;
+      const rightEdge = x > width - 10;
 
-    if (topEdge && leftEdge) setResizeDirection("nw");
-    else if (topEdge && rightEdge) setResizeDirection("ne");
-    else if (bottomEdge && leftEdge) setResizeDirection("sw");
-    else if (bottomEdge && rightEdge) setResizeDirection("se");
-    else if (topEdge) setResizeDirection("n");
-    else if (rightEdge) setResizeDirection("e");
-    else if (bottomEdge) setResizeDirection("s");
-    else if (leftEdge) setResizeDirection("w");
-    else setResizeDirection("");
+      if (topEdge && leftEdge) setResizeDirection("nw");
+      else if (topEdge && rightEdge) setResizeDirection("ne");
+      else if (bottomEdge && leftEdge) setResizeDirection("sw");
+      else if (bottomEdge && rightEdge) setResizeDirection("se");
+      else if (topEdge) setResizeDirection("n");
+      else if (rightEdge) setResizeDirection("e");
+      else if (bottomEdge) setResizeDirection("s");
+      else if (leftEdge) setResizeDirection("w");
+      else setResizeDirection("");
+    }
   };
-
-  useEffect(() => {
-    const { width, height } = windowRef.current!.getBoundingClientRect();
-    const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
-    setPosition({
-      x: (screenWidth - width) / 2,
-      y: (screenHeight - height) / 2,
-    });
-  }, []);
 
   return (
     <div
-      className="fixed bg-white shadow-lg overflow-hidden rounded-[10px]"
+      className="fixed bg-white border-transparent shadow-lg overflow-hidden rounded-md"
       style={{
-        top: position.y,
-        left: position.x,
+        top: `${position.y}px`,
+        left: `${position.x}px`,
         width: windowSize.width,
         height: windowSize.height,
-        boxShadow:
-          "0px 0.5px 0px 0px rgba(0, 0, 0, 0.15), 0px -0.5px 0px 0px rgba(0, 0, 0, 0.05) inset",
+        transition: isDragging || isResizing ? "none" : "all 0.2s ease-out",
       }}
       ref={windowRef}
       onMouseMove={(event) => handleMouseMove(event as unknown as MouseEvent)}
@@ -181,21 +181,39 @@ export function Window({ children }: { children: React.ReactNode }) {
           />
         </div>
       </div>
-      <div className="p-3">{children}</div>
-      {resizeDirection && (
-        <div
-          className={`absolute ${
-            resizeDirection.includes("n") ? "top-0" : "bottom-0"
-          } ${
-            resizeDirection.includes("w") ? "left-0" : "right-0"
-          } w-10 h-10 cursor-${
-            resizeDirection.includes("n") || resizeDirection.includes("s")
-              ? "ns"
-              : "ew"
-          }`}
-          onMouseDown={(event) => handleResizeMouseDown(event, resizeDirection)}
-        />
-      )}
+      {children}
+      {/*<div
+        className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "nw")}
+      />
+      <div
+        className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "ne")}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "sw")}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "se")}
+      />
+      <div
+        className="absolute top-0 left-2 right-2 h-2 cursor-n-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "n")}
+      />
+      <div
+        className="absolute bottom-0 left-2 right-2 h-2 cursor-s-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "s")}
+      />
+      <div
+        className="absolute top-2 bottom-2 left-0 w-2 cursor-w-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "w")}
+      />
+      <div
+        className="absolute top-2 bottom-2 right-0 w-2 cursor-e-resize"
+        onMouseDown={(event) => handleResizeMouseDown(event, "e")}
+      />*/}
     </div>
   );
 }
