@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { menuItems } from "~/app/components/ui/dock/apps/launchpad/apps.buttons.data";
 import { Button } from "./button";
@@ -9,7 +9,6 @@ interface LaunchPadProps {
 }
 
 export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
-  const launchpadRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(openLaunchPad);
 
   useEffect(() => {
@@ -45,7 +44,6 @@ export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        ref={launchpadRef}
       >
         <div className="flex justify-center flex-col items-center py-10">
           <div className="flex items-center">
