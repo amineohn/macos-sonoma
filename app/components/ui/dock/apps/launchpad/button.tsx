@@ -1,12 +1,9 @@
-export function Button({
-  index,
-  image,
-  label,
-}: {
+interface LaunchPadButtonProps {
   index: number;
   image: string;
   label: string;
-}) {
+}
+export function Button({ index, image, label }: LaunchPadButtonProps) {
   return (
     <button key={index} className="flex flex-col items-center">
       <img src={`/static/images/${image}`} className="w-16 h-16" />

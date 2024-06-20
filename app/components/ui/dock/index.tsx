@@ -1,8 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import { LaunchPad } from "~/app/components/ui/dock/apps/launchpad";
-import { DockButton, setButtonWidth } from "~/app/components/ui/dock/button";
+import { DockButton } from "~/app/components/ui/dock/button";
 import { dock_buttons } from "~/app/components/ui/dock/dock-buttons.data";
+import { setButtonWidth } from "~/app/components/ui/dock/apps/set-button-width";
 export function Dock() {
   const dockButtonsWrapper = useRef<HTMLDivElement>(null);
   const [openLaunchpad, setOpenLaunchpad] = useState(false);
