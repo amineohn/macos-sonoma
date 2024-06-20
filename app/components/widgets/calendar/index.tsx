@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { generateDatesForCurrentMonth } from "~/app/components/widgets/calendar/generate-dates-for-current-month";
+import { getCurrentMonth } from "~/app/components/widgets/calendar/get-current-month";
 
 export function Calendar() {
   const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
-  const { dates, today } = generateDatesForCurrentMonth();
+  const { dates, today } = getCurrentMonth();
   const now = new Date();
   const month = now.toLocaleString("default", { month: "long" }).toUpperCase();
 
