@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { Icons } from "~/app/components/ui/icons";
 import { motion } from "framer-motion";
 import { set, get } from "js-cookie";
-import { MainContent } from "~/app/components/screens/main-content";
+import { Toast } from "~/app/components/ui/notifications/toast";
+import { LockScreen } from "~/app/components/screens/lock";
 
 export function LoadingScreen() {
   const [showLoading, setShowLoading] = useState(false);
@@ -64,7 +65,34 @@ export function LoadingScreen() {
           ></div>
         </div>
       </motion.div>
-      {!showLoading && <MainContent />}
+      {!showLoading && (
+        <>
+          <div className="flex justify-end items-center">
+            <Icons
+              name="battery"
+              className="w-6 h-6 text-black hover:cursor-clicking mr-2"
+            />
+            <Icons
+              name="wifi"
+              className="w-6 h-6 text-black hover:cursor-clicking mr-2"
+            />
+          </div>
+
+          <Toast
+            title={"Notification"}
+            image="/static/images/no-app-icon.png"
+            message={
+              <>
+                Si vous voulez accéder à ce Mac, veuillez saisir le mot de passe
+                suivant : password
+              </>
+            }
+            time="maintenant"
+          />
+
+          <LockScreen />
+        </>
+      )}
     </>
   );
 }
