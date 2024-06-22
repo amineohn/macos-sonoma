@@ -1,6 +1,7 @@
-interface IIconsProps {
+import { SVGAttributes } from "react";
+
+interface IIconsProps extends SVGAttributes<SVGSVGElement> {
   name: string;
-  className: string;
 }
 export function Icons({ name, ...props }: IIconsProps) {
   switch (name) {
