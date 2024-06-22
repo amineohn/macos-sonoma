@@ -63,7 +63,7 @@ export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
   });
 
   const launchpadClasses = classNames(
-    "bg-black/50 backdrop-filter backdrop-blur-xl absolute inset-0 launchpad",
+    "bg-black/50 backdrop-filter backdrop-blur-xl absolute inset-0",
     {
       "overflow-hidden z-50": isOpen,
       "z-0": !isOpen,

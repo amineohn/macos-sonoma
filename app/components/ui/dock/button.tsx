@@ -15,7 +15,7 @@ export function DockButton({
   return (
     <button
       key={item.title}
-      className="w-16 align-bottom dock-item p-2"
+      className="w-16 align-bottom p-2"
       style={{ transition: "all ease .2s" }}
       onMouseEnter={() => onMouseEnter(index)}
       onMouseLeave={() => onMouseLeave(index)}
