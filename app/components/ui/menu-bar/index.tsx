@@ -93,7 +93,7 @@ export function MenuBar() {
         <div className="absolute inset-0 bg-gray-700/50 flex px-2 justify-between items-center mix-blend-color-burn backdrop-filter backdrop-blur-[51.8036px] z-0"></div>
       </div>
       <ControlCenter open={open} />
-      <Home openDropdown={openDropdown!} />
+      <Home openDropdown={openDropdown} />
     </>
   );
 }

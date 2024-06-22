@@ -1,8 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { MdArrowForwardIos } from "react-icons/md";
-
-export function Home({ openDropdown }: { openDropdown: string }) {
+interface HomeDropdownProps {
+  openDropdown: string | null;
+}
+export function Home({ openDropdown }: HomeDropdownProps) {
   const router = useRouter();
   return (
     openDropdown === "home" && (
