@@ -9,14 +9,16 @@ export function ControlCenter({ open }: { open: boolean }) {
       <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
         <div className="flex space-x-2">
           <div className="w-1/2 h-40 p-2 flex flex-col justify-around bg-white/20 rounded-xl">
-            {items.map(({ icon, label, status }) => (
-              <div key={label} className="flex items-center space-x-2">
+            {items.map((item) => (
+              <div key={item.label} className="flex items-center space-x-2">
                 <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-                  {icon}
+                  {item.icon}
                 </div>
                 <div className="flex flex-col pt-0.5">
-                  <span className="text-xs font-bold leading-4">{label}</span>
-                  <span className="text-xs">{status}</span>
+                  <span className="text-xs font-bold leading-4">
+                    {item.label}
+                  </span>
+                  <span className="text-xs">{item.status}</span>
                 </div>
               </div>
             ))}
