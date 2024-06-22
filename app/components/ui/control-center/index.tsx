@@ -8,7 +8,7 @@ export function ControlCenter({ open }: { open: boolean }) {
     open && (
       <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
         <div className="flex space-x-2">
-          <div className="w-1/2 p-2 flex flex-col justify-around bg-white/20 rounded-xl">
+          <div className="w-1/2 h-40 p-2 flex flex-col justify-around bg-white/20 rounded-xl">
             {items.map(({ icon, label, status }) => (
               <div key={label} className="flex items-center space-x-2">
                 <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
@@ -21,7 +21,7 @@ export function ControlCenter({ open }: { open: boolean }) {
               </div>
             ))}
           </div>
-          <div className="w-1/2 flex flex-col space-y-2">
+          <div className="w-1/2 h-40 flex flex-col space-y-2">
             <div className="flex flex-col h-20 justify-center bg-white/20 items-center rounded-xl">
               <div className="flex justify-center items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center">
