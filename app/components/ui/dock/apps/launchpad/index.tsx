@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDrag } from "@use-gesture/react";
 import classNames from "classnames";
 import { menuItems } from "~/app/components/ui/dock/apps/launchpad/apps.buttons.data";
-import { Button } from "./button";
+import { Button } from "~/app/components/ui/dock/apps/launchpad/button";
 
 interface LaunchPadProps {
   openLaunchPad: boolean;

@@ -2,7 +2,7 @@
 import { IoIosMoon } from "react-icons/io";
 import { LuAirplay } from "react-icons/lu";
 import { items } from "~/app/components/ui/control-center/control-center.data";
-import { Icons } from "../icons";
+import { Icons } from "~/app/components/ui/icons";
 
 export function ControlCenter({ open }: { open: boolean }) {
   return (
