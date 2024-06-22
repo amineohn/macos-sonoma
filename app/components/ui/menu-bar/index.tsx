@@ -1,44 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Icons } from "~/app/components/ui/icons";
-import { getFormattedTime } from "~/app/utils/get-formatted-time";
-import { getFormattedDate } from "~/app/utils/get-formatted-date";
 import { ControlCenter } from "~/app/components/ui/control-center";
+import {
+  iconItems,
+  menuItems,
+} from "~/app/components/ui/menu-bar/menu-bar.data";
+import { showDate } from "~/app/components/ui/menu-bar/show-date";
 
 export function MenuBar() {
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(getFormattedTime());
-      setDate(getFormattedDate());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const capitalize = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-
-  const showDate = () => {
-    const currentDate = new Date();
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    const formattedDate = new Intl.DateTimeFormat("fr-FR", options).format(
-      currentDate
-    );
-    const capitalizedDate = capitalize(formattedDate);
-
-    return capitalizedDate.replace(".,", " ").replace(".", "");
-  };
   return (
     <>
       <div className="relative w-full h-9 select-none">
@@ -53,22 +25,20 @@ export function MenuBar() {
                     className="w-6 h-6 text-black opacity-100"
                   />
                 </div>
-                {["Finder", "File", "Edit", "View", "Go", "Window", "Help"].map(
-                  (item) => (
-                    <button
-                      key={item}
-                      className="hover:bg-black/5 px-1.5 py-1 rounded-md transition ml-10"
-                    >
-                      <p className="text-xs font-medium text-black mix-blend-hard-light">
-                        {item}
-                      </p>
-                    </button>
-                  )
-                )}
+                {menuItems.map((item) => (
+                  <button
+                    key={item}
+                    className="hover:bg-black/5 px-1.5 py-1 rounded-md transition ml-10"
+                  >
+                    <p className="text-xs font-medium text-black mix-blend-hard-light">
+                      {item}
+                    </p>
+                  </button>
+                ))}
               </div>
               <div>
                 <div className="flex items-center justify-center">
-                  {["battery", "wifi", "search", "control"].map((icon) => (
+                  {iconItems.map((icon) => (
                     <div
                       key={icon}
                       className="hover:bg-black/5 px-1 py-0.5 rounded-md transition"
@@ -96,7 +66,6 @@ export function MenuBar() {
         </div>
         <div className="absolute inset-0 bg-gray-700/50 flex px-2 justify-between items-center mix-blend-color-burn backdrop-filter backdrop-blur-[51.8036px] z-0"></div>
       </div>
-
       <ControlCenter open={open} />
     </>
   );
