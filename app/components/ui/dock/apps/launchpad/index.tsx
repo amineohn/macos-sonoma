@@ -33,7 +33,7 @@ export function LaunchPad({ openLaunchPad }: LaunchPadProps) {
     "bg-black/50 backdrop-filter backdrop-blur-xl absolute inset-0 launchpad",
     {
       "overflow-hidden z-50": isOpen,
-      "z-0": !isOpen,
+      "z-0 hidden": !isOpen,
     }
   );
 
