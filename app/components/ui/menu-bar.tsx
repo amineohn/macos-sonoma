@@ -1,15 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Icons } from "~/app/components/ui/icons";
-import { useTheme } from "next-themes";
 import { getFormattedTime } from "~/app/utils/get-formatted-time";
 import { getFormattedDate } from "~/app/utils/get-formatted-date";
+import { ControlCenter } from "~/app/components/ui/control-center";
 
 export function MenuBar() {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [open, setOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +39,6 @@ export function MenuBar() {
 
     return capitalizedDate.replace(".,", " ").replace(".", "");
   };
-
   return (
     <>
       <div className="relative w-full h-9 select-none">
@@ -99,45 +97,7 @@ export function MenuBar() {
         <div className="absolute inset-0 bg-gray-700/50 flex px-2 justify-between items-center mix-blend-color-burn backdrop-filter backdrop-blur-[51.8036px] z-0"></div>
       </div>
 
-      {open && (
-        <div className="fixed shadow w-80 h-96 max-w-full top-10 right-0 sm:right-1.5 p-2.5 text-black bg-white/30 backdrop-blur-md rounded-2xl select-none z-50">
-          <div className="row-span-2 col-span-2 p-2 flex flex-col justify-around">
-            {[
-              { icon: "wifi", label: "Wi-Fi", status: "Home" },
-              { icon: "bluetooth", label: "Bluetooth", status: "On" },
-              {
-                icon: "rss-feed-rounded",
-                label: "AirDrop",
-                status: "Contacts Only",
-              },
-            ].map(({ icon, label, status }) => (
-              <div key={label} className="flex items-center space-x-2">
-                <div className="cc-btn">
-                  <span
-                    className={`i-material-symbols:${icon} text-base`}
-                  ></span>
-                </div>
-                <div className="flex flex-col pt-0.5">
-                  <span className="font-medium leading-4">{label}</span>
-                  <span className="cc-text">{status}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center col-span-2 p-2 space-x-2">
-            <div className="cc-btn">
-              <Icons
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                name={theme === "dark" ? "light" : "moon"}
-                className="w-5 h-5"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-medium ml-1">Light Mode</span>
-            </div>
-          </div>
-        </div>
-      )}
+      <ControlCenter open={open} />
     </>
   );
 }
