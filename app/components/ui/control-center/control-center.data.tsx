@@ -3,17 +3,17 @@ import { Icons } from "~/app/components/ui/icons";
 
 export const items = [
   {
-    icon: <IoIosWifi className="text-white" />,
+    icon: <IoIosWifi />,
     label: "Wi-Fi",
     status: "Home",
   },
   {
-    icon: <IoIosBluetooth className="text-white" />,
+    icon: <IoIosBluetooth />,
     label: "Bluetooth",
     status: "On",
   },
   {
-    icon: <Icons name="bluetooth" className="w-4 h-4 text-white" />,
+    icon: <Icons name="bluetooth" />,
     label: "AirDrop",
     status: "Contacts Only",
   },

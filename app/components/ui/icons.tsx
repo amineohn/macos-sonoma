@@ -121,7 +121,7 @@ export function Icons({ name, ...props }: IIconsProps) {
           {...props}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 50 50"
-          className="w-4 h-4 text-white"
+          className="w-4 h-4"
         >
           <path
             fill="currentColor"
