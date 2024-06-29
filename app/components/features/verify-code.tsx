@@ -7,9 +7,7 @@ export function VerifyCode({ children }: { children: ReactNode }) {
   const router = useRouter();
   useEffect(() => {
     if (!code) {
-      router.push("/secret/verify", {
-        shallow: true,
-      });
+      router.push("/secret/verify");
     }
   }, [code, router]);
   return <>{children}</>;
