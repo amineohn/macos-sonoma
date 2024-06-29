@@ -39,7 +39,7 @@ export function Weather() {
   }
 
   return (
-    <div className="w-[150px] h-[150px] rounded-2xl bg-blue-500">
+    <div className="w-[150px] h-[150px] rounded-2xl bg-blue-500 hidden">
       <div className="p-3">
         <h3 className="text-white font-semibold text-xs">
           {weatherData.location.name}

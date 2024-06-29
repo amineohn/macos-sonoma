@@ -14,5 +14,5 @@ export function showDate() {
   );
   const capitalizedDate = capitalize(formattedDate);
 
-  return capitalizedDate.replace(".,", " ").replace(".", "");
+  return capitalizedDate.replace(",", " ").replace(".", "");
 }
