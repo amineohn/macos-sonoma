@@ -1,3 +1,5 @@
+import { CodeProvider } from "~/app/components/providers/code-provider";
+
 export const metadata = {
   title: "House",
   description: "R",
@@ -11,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <CodeProvider>
+        <body>{children}</body>
+      </CodeProvider>
     </html>
   );
 }

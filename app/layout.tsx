@@ -1,4 +1,5 @@
 import "./globals.css";
+
 export const metadata = {
   title: "MacOS Sonoma",
   description: "Re Production of MacOS Sonoma",
