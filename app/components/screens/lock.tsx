@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { IoRefresh } from "react-icons/io5";
+import Image from "next/image";
 import { getCurrentTime } from "~/app/utils/get-current-time";
 import { getCurrentDate } from "~/app/utils/get-current-date";
 export function LockScreen() {
@@ -99,9 +100,12 @@ export function LockScreen() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
       >
-        <img
+        <Image
+          alt={"Amine OUHANI"}
           src="https://avatars.githubusercontent.com/u/38817327?v=4"
           className="w-10 h-10 rounded-full text-white mr-2"
+          width={500}
+          height={500}
         />
         <p className="text-white font-medium text-xs select-none">
           Amine OUHANI

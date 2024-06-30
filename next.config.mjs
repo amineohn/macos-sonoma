@@ -4,7 +4,7 @@
 const nextConfig = {
   /* config options here */
   images: {
-    domains: ['raw.githubusercontent.com', "api.lanyard.rest", "cdn.discordapp.com"],
+    domains: ['raw.githubusercontent.com', "api.lanyard.rest", "cdn.discordapp.com", "avatars.githubusercontent.com"],
   },
 };
 

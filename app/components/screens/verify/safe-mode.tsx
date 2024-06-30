@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { IoRefresh } from "react-icons/io5";
 import { getCurrentTime } from "~/app/utils/get-current-time";
@@ -115,10 +116,14 @@ export function SafeMode() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
       >
-        <img
-          src="https://avatars.githubusercontent.com/u/38817327?v=4"
+        <Image
+          alt={"Administrator"}
           className="w-10 h-10 rounded-full text-white mr-2"
+          src="https://avatars.githubusercontent.com/u/38817327?v=4"
+          width={500}
+          height={500}
         />
+
         <p className="text-white font-medium text-xs select-none">
           Administrator
         </p>

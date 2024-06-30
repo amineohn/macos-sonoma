@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useEffect } from "react";
-
+import Image from "next/image";
 export function Toast({
   title,
   message,
@@ -27,7 +27,13 @@ export function Toast({
           <span className="text-xs font-light text-neutral-950">{time}</span>
         </div>
         <div className="inline-flex space-x-2 items-center ">
-          <img src={image} className="w-10 h-10" />
+          <Image
+            alt={title}
+            src={image}
+            className="w-10 h-10"
+            width={500}
+            height={500}
+          />
           <div className="flex flex-col">
             <p className="text-sm font-semibold text-black/80">{title}</p>
             <span className="text-xs font-normal text-black/60">{message}</span>
